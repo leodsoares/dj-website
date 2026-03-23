@@ -2,6 +2,9 @@
   <footer class="footer">
     <div class="footer-name">DJ Leo Soares</div>
     <div class="footer-copy">&copy; 2026 &middot; All rights reserved</div>
+    <div class="footer-attr">
+      <a href="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons" target="_blank" rel="noopener">Pokemon icons created by Freepik - Flaticon</a>
+    </div>
   </footer>
 </template>
 
@@ -27,6 +30,21 @@
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 0.12em;
+}
+
+.footer-attr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-attr a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-attr a:hover {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 @media (max-width: 768px) {
