@@ -3,20 +3,30 @@
     <img :src="headshot" alt="" class="page-bg-img" />
   </div>
   <NavBar />
-  <HeroSection />
-  <EventsSection />
-  <PastShowsSection />
+  <RouterView v-slot="{ Component, route }">
+    <Transition :name="transitionName" mode="out-in">
+      <component :is="Component" :key="route.path" />
+    </Transition>
+  </RouterView>
   <SiteFooter />
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import NavBar from './components/NavBar.vue'
-import HeroSection from './components/HeroSection.vue'
-import EventsSection from './components/EventsSection.vue'
-import PastShowsSection from './components/PastShowsSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import headshot from './assets/headshot3.jpg'
+
+const route = useRoute()
+const prevOrder = ref(0)
+
+const transitionName = computed(() => {
+  const order = route.meta?.order ?? 0
+  const name = order >= prevOrder.value ? 'slide-left' : 'slide-right'
+  prevOrder.value = order
+  return name
+})
 
 const bgRef = ref(null)
 
@@ -31,6 +41,21 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <style>
+/* Slide transitions */
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.slide-left-enter-from  { transform: translateX(60px);  opacity: 0; }
+.slide-left-leave-to    { transform: translateX(-60px); opacity: 0; }
+.slide-right-enter-from { transform: translateX(-60px); opacity: 0; }
+.slide-right-leave-to   { transform: translateX(60px);  opacity: 0; }
+
 .page-bg {
   position: fixed;
   top: 0;

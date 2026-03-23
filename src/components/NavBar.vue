@@ -1,15 +1,15 @@
 <template>
   <nav class="nav">
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#events">Events</a></li>
+      <li><RouterLink to="/">About</RouterLink></li>
+      <li><RouterLink to="/#events">Events</RouterLink></li>
     </ul>
-    <a href="#" class="nav-logo">
+    <RouterLink to="/" class="nav-logo">
       <img src="/src/assets/logo2.png" alt="DJ Leo Soares" class="nav-logo-img" />
-    </a>
+    </RouterLink>
     <ul class="nav-links">
-      <li><a href="#past-shows">Past Shows</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><RouterLink to="/past-shows">Past Shows</RouterLink></li>
+      <li><RouterLink to="/#contact">Contact</RouterLink></li>
     </ul>
   </nav>
 </template>
