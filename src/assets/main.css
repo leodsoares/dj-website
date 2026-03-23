@@ -1,0 +1,74 @@
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #0d0d14;
+  border: 1px solid rgba(205, 43, 204, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #cd2bcc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #e535e4;
+}
+
+/* ===================== DESIGN TOKENS ===================== */
+:root {
+  --primary:   #cd2bcc;
+  --secondary: #8B5CF6;
+  --success:   #16A34A;
+  --warning:   #D97706;
+  --danger:    #DC2626;
+  --surface:   #FFFFFF;
+  --bg:        #07070b;
+  --bg-2:      #0d0d14;
+  --muted:     rgba(255, 255, 255, 0.4);
+  --border:    rgba(205, 43, 204, 0.15);
+}
+
+/* ===================== RESET ===================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--surface);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* Global fine dot grain — the dithered texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 4px 4px;
+  pointer-events: none;
+  z-index: 900;
+}
+
+/* ===================== SHARED ANIMATIONS ===================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
