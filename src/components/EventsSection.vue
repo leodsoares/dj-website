@@ -337,7 +337,8 @@ const upcomingEvents = computed(() =>
 
 @media (max-width: 768px) {
   .events { padding: 80px 24px; }
-  .event-row { grid-template-columns: 72px 1fr; gap: 20px; }
-  .event-meta { display: none; }
+  .event-row { grid-template-columns: 72px 1fr; gap: 16px; flex-wrap: wrap; }
+  .event-meta { grid-column: 1 / -1; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding-top: 4px; }
+  .ev-tickets { font-size: 13px; padding: 8px 14px; }
 }
 </style>

@@ -800,4 +800,17 @@ const groupedEvents = computed(() => {
   color: rgba(255, 255, 255, 0.65);
   font-weight: 400;
 }
+
+@media (max-width: 768px) {
+  .past-shows { padding-top: 160px; }
+  .past-shows-inner { padding: 24px; }
+
+  .spotlight-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+
+  .event-row { gap: 16px; padding: 16px; align-items: flex-start; }
+
+  .ev-name-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .tag-group { flex-wrap: wrap; }
+}
 </style>

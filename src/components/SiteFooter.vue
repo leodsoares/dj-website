@@ -2,6 +2,7 @@
   <footer class="footer">
     <div class="footer-name">DJ Leo Soares</div>
     <div class="footer-copy">&copy; 2026 &middot; All rights reserved</div>
+    <a href="mailto:bookings@leosoaresmusic.com" class="footer-email">bookings@leosoaresmusic.com</a>
     <div class="footer-attr">
       <a href="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons" target="_blank" rel="noopener">Pokemon icons created by Freepik - Flaticon</a>
     </div>
@@ -31,6 +32,17 @@
   color: var(--muted);
   letter-spacing: 0.12em;
 }
+
+.footer-email {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--primary);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: opacity 0.2s;
+}
+
+.footer-email:hover { opacity: 0.7; }
 
 .footer-attr {
   font-family: 'IBM Plex Mono', monospace;

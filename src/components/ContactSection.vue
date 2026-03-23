@@ -7,6 +7,7 @@
       <div class="contact-layout">
         <div class="contact-intro">
           <p class="intro-text">Bookings, collabs, or just want to say hi — drop a message and I'll get back to you.</p>
+          <a href="mailto:bookings@leosoaresmusic.com" class="contact-email">bookings@leosoaresmusic.com</a>
         </div>
 
         <form class="contact-form" @submit.prevent="handleSubmit">
@@ -22,11 +23,6 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input id="email" v-model="form.email" class="form-input" type="email" placeholder="you@example.com" required />
-          </div>
-
-          <div class="form-group">
             <label class="form-label" for="subject">Subject</label>
             <input id="subject" v-model="form.subject" class="form-input" type="text" placeholder="You are awesome" required />
           </div>
@@ -36,12 +32,7 @@
             <textarea id="message" v-model="form.message" class="form-input form-textarea" placeholder="Tell me more..." rows="6" required></textarea>
           </div>
 
-          <button type="submit" class="form-submit" :disabled="state === 'sending'">
-            <span v-if="state === 'idle'">Send Message &rarr;</span>
-            <span v-else-if="state === 'sending'">Sending...</span>
-            <span v-else-if="state === 'sent'">Message Sent ✓</span>
-            <span v-else-if="state === 'error'">Something went wrong — try again</span>
-          </button>
+          <button type="submit" class="form-submit">Send Message &rarr;</button>
         </form>
       </div>
     </div>
@@ -50,44 +41,21 @@
 
 <script setup>
 import { ref } from 'vue'
-import emailjs from '@emailjs/browser'
-
-// Replace these with your EmailJS credentials
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
-
-const state = ref('idle') // idle | sending | sent | error
 
 const form = ref({
   firstName: '',
   lastName:  '',
-  email:     '',
   subject:   '',
   message:   '',
 })
 
-async function handleSubmit() {
-  state.value = 'sending'
-  try {
-    await emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      {
-        from_name:  `${form.value.firstName} ${form.value.lastName}`,
-        from_email: form.value.email,
-        subject:    form.value.subject,
-        message:    form.value.message,
-      },
-      EMAILJS_PUBLIC_KEY,
-    )
-    state.value = 'sent'
-    form.value = { firstName: '', lastName: '', email: '', subject: '', message: '' }
-    setTimeout(() => state.value = 'idle', 5000)
-  } catch {
-    state.value = 'error'
-    setTimeout(() => state.value = 'idle', 5000)
-  }
+function handleSubmit() {
+  const name    = `${form.value.firstName} ${form.value.lastName}`.trim()
+  const body    = `Name: ${name}\n\n${form.value.message}`
+  const mailto  = `mailto:bookings@leosoaresmusic.com`
+             + `?subject=${encodeURIComponent(form.value.subject)}`
+             + `&body=${encodeURIComponent(body)}`
+  window.location.href = mailto
 }
 </script>
 
@@ -139,6 +107,19 @@ async function handleSubmit() {
   flex-direction: column;
   gap: 40px;
 }
+
+.contact-email {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.contact-email:hover { opacity: 0.7; }
 
 .intro-text {
   font-size: 15px;

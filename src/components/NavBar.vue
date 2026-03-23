@@ -85,7 +85,19 @@
 .nav-links a:hover::after { width: 100%; }
 
 @media (max-width: 768px) {
-  .nav { padding: 18px 24px; }
-  .nav-links { display: none; }
+  .nav {
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-links {
+    gap: 16px;
+    flex: none;
+    width: 100%;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+  .nav-logo { order: -1; width: 100%; justify-content: center; }
+  .nav-logo-img { height: 70px; }
 }
 </style>
