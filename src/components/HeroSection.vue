@@ -61,7 +61,7 @@ function drawDitheredOrb() {
   const canvas = canvasRef.value
   const ctx = canvas.getContext('2d')
   const W = canvas.width, H = canvas.height
-  const cx = W / 2, cy = H / 2
+  const cx = W * 0.35, cy = H / 2
   const maxR = Math.min(W, H) * 0.85
 
   const img = ctx.createImageData(W, H)
@@ -73,7 +73,7 @@ function drawDitheredOrb() {
       const dist = Math.sqrt(dx * dx + dy * dy)
       const t = Math.min(dist / maxR, 1)
       const intensity = Math.pow(1 - t, 1.6)
-      const threshold = BAYER_8[y & 7][x & 7] / 64 + (Math.random() * 0.06 - 0.03)
+      const threshold = BAYER_8[y & 7][x & 7] / 64
 
       if (intensity > threshold) {
         // Purple #522793
@@ -99,19 +99,6 @@ function startBreathe() {
     animId = requestAnimationFrame(tick)
   }
   tick()
-}
-
-function onMove(e) {
-  const rect = e.currentTarget.getBoundingClientRect()
-  const x = ((e.clientX - rect.left) / rect.width) * 100
-  const y = ((e.clientY - rect.top) / rect.height) * 100
-  e.currentTarget.style.setProperty('--x', `${x}%`)
-  e.currentTarget.style.setProperty('--y', `${y}%`)
-}
-
-function onLeave(e) {
-  e.currentTarget.style.removeProperty('--x')
-  e.currentTarget.style.removeProperty('--y')
 }
 
 onMounted(() => {
@@ -148,11 +135,11 @@ onUnmounted(() => {
 
 .dither-canvas {
   position: absolute;
-  top: 40%;
-  left: 55%;
+  top: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  width: min(140vw, 1400px);
-  height: min(140vw, 1400px);
+  width: 100vw;
+  height: 100vw;
   pointer-events: none;
   opacity: 0.9;
   mix-blend-mode: screen;
@@ -341,6 +328,6 @@ onUnmounted(() => {
   .hero { padding: 110px 24px 80px; }
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 28px; }
   .scroll-hint { display: none; }
-  .dither-canvas { width: 100vw; height: 100vw; left: 50%; }
+
 }
 </style>
