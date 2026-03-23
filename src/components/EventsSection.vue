@@ -306,19 +306,25 @@ const upcomingEvents = computed(() =>
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--primary);
-  background: none;
-  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0;
+  gap: 8px;
+  padding: 10px 18px;
   text-decoration: none;
-  transition: gap 0.2s;
+  border: 1px solid rgba(205, 43, 204, 0.35);
+  background: transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
-.ev-tickets:hover { gap: 10px; }
-.ev-tickets.sold  { color: var(--muted); cursor: default; }
+.event-row:hover .ev-tickets:not(.sold) {
+  background: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px) #ffffff;
+  background-size: 4px 4px;
+  border-color: #ffffff;
+  color: #07070b;
+}
+
+.ev-tickets.sold  { color: var(--muted); cursor: default; border-color: transparent; }
 
 .no-events {
   padding: 80px 0;

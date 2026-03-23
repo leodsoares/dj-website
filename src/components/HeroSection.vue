@@ -1,6 +1,6 @@
 <template>
   <section class="hero">
-    <canvas ref="canvasRef" class="dither-canvas" width="800" height="800" />
+    <canvas ref="canvasRef" class="dither-canvas" width="1400" height="1400" />
 
     <div class="hero-content">
       <p class="hero-eyebrow">Tech House &middot; Bass House &middot; Open Format</p>
@@ -18,22 +18,22 @@
     </div>
 
     <div class="hero-socials">
-      <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud" @mouseenter="onMove" @mousemove="onMove" @mouseleave="onLeave">
+      <a href="https://soundcloud.com/user-746975416-319036284" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">
         <FontAwesomeIcon :icon="['fab', 'soundcloud']" style="font-size: 22px;" />
       </a>
-      <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram" @mouseenter="onMove" @mousemove="onMove" @mouseleave="onLeave">
+      <a href="https://www.instagram.com/dj_leo_soares/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <!-- Instagram -->
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
         </svg>
       </a>
-      <a href="#contact" class="social-btn" aria-label="Contact" @mouseenter="onMove" @mousemove="onMove" @mouseleave="onLeave">
+      <RouterLink to="/contact" class="social-btn" aria-label="Contact">
         <!-- Contact -->
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
           <polyline points="22,6 12,13 2,6"/>
         </svg>
-      </a>
+      </RouterLink>
     </div>
 
   </section>
@@ -76,11 +76,11 @@ function drawDitheredOrb() {
       const threshold = BAYER_8[y & 7][x & 7] / 64 + (Math.random() * 0.06 - 0.03)
 
       if (intensity > threshold) {
-        // Bright primary pink #cd2bcc
+        // Purple #522793
         const i = (y * W + x) * 4
-        d[i]     = 205
-        d[i + 1] = 43
-        d[i + 2] = 204
+        d[i]     = 82
+        d[i + 1] = 39
+        d[i + 2] = 147
         d[i + 3] = Math.round(255 * Math.min(intensity * 1.4, 1))
       }
     }
@@ -132,7 +132,6 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: center;
   padding: 140px 48px 100px;
-  overflow: hidden;
 }
 
 /* Sparse grid lines */
@@ -149,11 +148,11 @@ onUnmounted(() => {
 
 .dither-canvas {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 55%;
   transform: translate(-50%, -50%);
-  width: 780px;
-  height: 780px;
+  width: min(140vw, 1400px);
+  height: min(140vw, 1400px);
   pointer-events: none;
   opacity: 0.9;
   mix-blend-mode: screen;
@@ -195,6 +194,9 @@ onUnmounted(() => {
   line-height: 0.88;
   letter-spacing: -0.025em;
   text-transform: uppercase;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .hero-title .t1 {
@@ -287,23 +289,25 @@ onUnmounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: var(--muted);
   text-decoration: none;
-  transition: color 0.2s, border-color 0.2s;
-  /* For circles instead, change to: border-radius: 50%; */
+  position: relative;
+}
+
+/* Icon scales toward the user on hover */
+.social-btn > * {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.social-btn:hover > * {
+  transform: scale(1.35);
 }
 
 .social-btn::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(205, 43, 204, 0.4), transparent 70%);
+  background: linear-gradient(to right, rgba(205, 43, 204, 0.45) 0%, rgba(205, 43, 204, 0.15) 50%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
-}
-
-.social-btn:hover {
-  color: var(--surface);
-  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .social-btn:hover::after { opacity: 1; }
@@ -337,6 +341,6 @@ onUnmounted(() => {
   .hero { padding: 110px 24px 80px; }
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 28px; }
   .scroll-hint { display: none; }
-  .dither-canvas { width: 400px; height: 400px; left: 50%; }
+  .dither-canvas { width: 100vw; height: 100vw; left: 50%; }
 }
 </style>

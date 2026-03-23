@@ -9,7 +9,7 @@
     </RouterLink>
     <ul class="nav-links">
       <li><RouterLink to="/past-shows">Past Shows</RouterLink></li>
-      <li><RouterLink to="/#contact">Contact</RouterLink></li>
+      <li><RouterLink to="/contact">Contact</RouterLink></li>
     </ul>
   </nav>
 </template>
