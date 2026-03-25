@@ -325,9 +325,11 @@ onUnmounted(() => {
 
 
 @media (max-width: 768px) {
-  .hero { padding: 110px 24px 80px; }
+  .hero { padding: 72px 24px 120px; min-height: auto; justify-content: flex-start; }
+  .hero-title { font-size: clamp(48px, 12vw, 72px); overflow-wrap: break-word; }
+  .hero-tagline { font-size: 18px; }
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 28px; }
   .scroll-hint { display: none; }
-
+  .dither-canvas { top: 32%; }
 }
 </style>
