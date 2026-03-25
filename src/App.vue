@@ -82,4 +82,17 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   -webkit-mask-composite: source-in;
   opacity: 0.75;
 }
+
+@media (max-width: 768px) {
+  .page-bg { width: 100%; right: auto; left: 0; opacity: 0.35; }
+  .page-bg-img {
+    object-position: center 15%;
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
+    mask-composite: unset;
+    -webkit-mask-composite: unset;
+  }
+}
 </style>

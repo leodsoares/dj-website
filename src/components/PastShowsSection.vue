@@ -806,7 +806,9 @@ const groupedEvents = computed(() => {
   .past-shows-inner { padding: 24px; }
 
   .spotlight-grid { grid-template-columns: 1fr; }
+  .spotlight-card { padding: 20px; }
   .stats-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: 24px 16px; }
 
   .event-row { gap: 16px; padding: 16px; align-items: flex-start; }
 
