@@ -42,6 +42,9 @@
             >
               <FontAwesomeIcon :icon="['fas', 'ticket']" /> Get Tickets
             </a>
+            <span v-else-if="ev.doorSale" class="ev-tickets door">
+              <FontAwesomeIcon :icon="['fas', 'ticket']" /> Tickets at the Door
+            </span>
             <span v-else class="ev-tickets sold">
               {{ ev.status === 'sold-out' ? 'Sold Out' : '' }}
             </span>
@@ -80,6 +83,8 @@ const STATUS_LABELS = {
 }
 
 const EVENTS = [
+  { date: new Date(2026, 3, 4),  name: 'Soundroom', venue: '1181 Davie St', city: 'Vancouver, BC', status: 'available', doorSale: true },
+  { date: new Date(2026, 3, 10), name: 'Pop Fridays', venue: '1181 Davie St', city: 'Vancouver, BC', status: 'available', doorSale: true },
   { date: new Date(2026, 3, 17), name: 'Bimbo Punk Rock', venue: 'Village Studios', city: '10 PM – 4 AM', status: 'available', ticketUrl: 'https://www.ticketweb.ca/event/bimbo-punk-rock-village-studios-tickets/14795723?pl=blueprint~&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnKoNKumhEfvs4jLgsE13ayAUPrw7Bp5EV5bWOUlghOevCLAXZaBsfsMETui4_aem_GDgi412KbbigcVb2NQohog' },
 ]
 
@@ -317,7 +322,7 @@ const upcomingEvents = computed(() =>
   transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
-.event-row:hover .ev-tickets:not(.sold) {
+.event-row:hover .ev-tickets:not(.sold):not(.door) {
   background: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px) #ffffff;
   background-size: 4px 4px;
   border-color: #ffffff;
@@ -325,6 +330,7 @@ const upcomingEvents = computed(() =>
 }
 
 .ev-tickets.sold  { color: var(--muted); cursor: default; border-color: transparent; }
+.ev-tickets.door  { cursor: default; border-color: rgba(205, 43, 204, 0.2); color: var(--muted); }
 
 .no-events {
   padding: 80px 0;
